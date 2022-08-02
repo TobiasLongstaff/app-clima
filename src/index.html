@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/globalStyles.css">
+    <title>AppClima</title>
+</head>
+<body>
+    <div class="container-app">
+        <header class="header-title">
+            <h1>AppClima</h1>
+        </header>
+        <main class="main-app">
+            <div style="width: 100%;">
+                <div class="container-temp">
+                    <div>
+                        <h2 id="city" class="name-city"></h2>
+                        <div class="container-data-temp">
+                            <img id="img-weather" class="img-weather"/>
+                            <span id="desciption-weather"></span>
+                        </div>            
+                    </div>
+                    <h2 id="temp" class="temp-city">°</h2> 
+                </div>
+                <div class="container-temp-details">
+                    <span>Sensacion termica: <span id="feels-like"></span></span>  
+                    <span>Humedad: <span id="humidity"></span></span>      
+                    <span>Min: <span id="min"></span></span>
+                    <span>Max: <span id="max"></span></span>
+                    <span>Velocidad del viento: <span id="wind-speed"></span></span>                       
+                </div>
+            </div>
+        </main>
+        <nav class="navigation">
+            <!-- <select>
+                <option></option>
+            </select> -->
+        </nav> 
+    </div>
+
+    <script src="./scripts.js"></script>
+</body>
+</html>

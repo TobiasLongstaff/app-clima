@@ -1,0 +1,90 @@
+
+:root {
+    --black: #131121;
+    --darkblue: #1C1A2E;
+    --white: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    font-family: 'Manrope-regular';
+    font-size: 16px;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+.container-app {
+    height: 100vh;
+    width: 100%;
+}
+
+.header-title {
+    font-size: 12px;
+    font-family: 'Manrope-ExtraBold';
+    margin: 20px;
+}
+
+.main-app {
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    height: calc(100vh - 82px - 60px);
+}
+
+.navigation {
+    height: 60px;
+    background-color: var(--darkblue);
+}
+
+.container-temp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.container-data-temp {
+    display: flex;
+    align-items: center;
+}
+
+.name-city {
+    font-size: 32px;
+}
+
+.temp-city {
+    font-size: 68px;
+}
+
+.img-weather {
+    height: 70px;
+}
+
+.container-temp-details {
+    display: grid;
+}
+
+@font-face {
+    font-family: 'Manrope-ExtraBold';
+    src: url('../fonts/manrope-extrabold.otf');
+}
+@font-face {
+    font-family: 'Manrope-Bold';
+    src: url('../fonts/manrope-bold.otf');
+}
+@font-face {
+    font-family: 'Manrope-regular';
+    src: url('../fonts/manrope-regular.otf');
+}
+@font-face {
+    font-family: 'Manrope-light';
+    src: url('../fonts/manrope-light.otf');
+}
