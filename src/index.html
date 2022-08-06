@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <!-- STYLES -->
     <link rel="stylesheet" href="./styles/globalStyles.css">
     <title>AppClima</title>
 </head>
@@ -25,18 +28,47 @@
                     <h2 id="temp" class="temp-city">°</h2> 
                 </div>
                 <div class="container-temp-details">
-                    <span>Sensacion termica: <span id="feels-like"></span></span>  
-                    <span>Humedad: <span id="humidity"></span></span>      
-                    <span>Min: <span id="min"></span></span>
-                    <span>Max: <span id="max"></span></span>
-                    <span>Velocidad del viento: <span id="wind-speed"></span></span>                       
+                    <div class="details-temp">
+                        <i class="uil uil-temperature-quarter"></i>
+                        <span id="feels-like"></span> 
+                        <span class="text-datails-temp">Feels Like</span>
+                    </div>
+                    <div class="details-temp">
+                        <i class="uil uil-tear"></i>
+                        <span id="humidity"></span>
+                        <span class="text-datails-temp">Humidity</span> 
+                    </div>
+                    <div class="details-temp">
+                        <i class="uil uil-wind"></i>
+                        <span id="wind-speed"></span>
+                        <span class="text-datails-temp">Wind</span>
+                    </div>             
                 </div>
             </div>
         </main>
         <nav class="navigation">
-            <!-- <select>
-                <option></option>
-            </select> -->
+            <input 
+                class="text-input" 
+                type="search" 
+                list="citys" 
+                id="search" 
+                autocomplete="off"
+                placeholder="Search city"
+            />
+            <datalist id="citys">
+                <option value="Buenos Aires">Buenos Aires</option>
+                <option value="Bogota">Bogota</option>
+                <option value="Santiago">Santiago</option>
+                <option value="Sao Paulo">Sao Paulo</option>
+                <option value="Lima">Lima</option>
+                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Japon">Japan</option>
+            </datalist>
+            <select class="text-input units" id="units">
+                <option value="metric">C°</option>
+                <option value="imperial">F°</option>
+            </select>
         </nav> 
     </div>
 
