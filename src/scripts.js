@@ -43,6 +43,22 @@ const getWeather = async (country = 'Buenos Aires', units = 'metric') => {
         document.querySelector('#loader').style.display = 'none'
         document.querySelector('#app').style.opacity = 1
 
+        // <label>${new Date(temp.dt*1000)}</label>
+        let template = ''
+        weather.hourly.map(temp => {
+            template += 
+            `
+                <div class="card-weather">
+                    <div class="container-img-card">
+                        <img class="img-day-weather" src="https://openweathermap.org/img/wn/${temp.weather[0].icon}@2x.png" alt="${temp.weather[0].description}"/>                    
+                    </div>
+                    <h3>${Math.round(temp.temp)}°</h3>
+                    <label class="text-datails-temp">${new Date(temp.dt*1000).getHours()}:00</label>
+                </div>
+            `
+        })
+        document.querySelector('#weather-forecast').innerHTML = template
+
         const rootElem = document.querySelector(':root')
         if(weather.current.weather[0].icon.includes('d')) {
             rootElem.style.setProperty('--background', '#fff')
@@ -54,31 +70,6 @@ const getWeather = async (country = 'Buenos Aires', units = 'metric') => {
             rootElem.style.setProperty('--primary', '#1C1A2E')
             rootElem.style.setProperty('--font', '#FFFFFF')
         }
-
-        let template = ''
-
-        // <label>${new Date(temp.dt*1000)}</label>
-
-        weather.hourly.map(temp => {
-            template += 
-            `
-                <div class="card-weather">
-                    <div class="container-img-card">
-                        <img class="img-day-weather" src="https://openweathermap.org/img/wn/${temp.weather[0].icon}@2x.png" alt="${temp.weather[0].description}"/>                    
-                    </div>
-                    <h3>${Math.round(temp.temp)}°</h3>
-                    <labe class="text-datails-temp">${new Date(temp.dt*1000).getHours()}:00</labe>
-                </div>
-            `
-
-            // console.log([
-            //     Math.round(temp.temp),
-            //     temp.humidity,
-            //     temp.wind_speed,
-            //     temp.weather[0].icon
-            // ])
-        })
-        document.querySelector('#weather-forecast').innerHTML = template
     }
     catch(error) {
         console.log(error)
