@@ -28,8 +28,8 @@ h1, h2, h3, h4 {
 }
 
 .container-app {
-    max-width: 375px;
-    max-height: 667px;
+    max-width: 500px;
+    max-height: 900px;
     height: 100vh;
     width: 100%;
     background-color: var(--background);
@@ -41,17 +41,19 @@ h1, h2, h3, h4 {
     font-size: 12px;
     font-family: 'Manrope-ExtraBold';
     margin: 20px;
+    margin-bottom: 10%;
 }
 
 .main-app {
     display: flex;
     padding: 10px 5%;
-    height: calc(100% - 82px - 70px);
+    height: calc(90% - 25px - 70px);
     opacity: 0;
 }
 
 .container-weather-info {
     width: 100%;
+    max-height: 600px;
     display: grid;
     gap: 10px;
 }
@@ -60,7 +62,8 @@ h1, h2, h3, h4 {
     position: absolute;
     display: flex;
     top: 40px;
-    width: 375px;
+    max-width: 500px;
+    width: 100%;
     justify-content: center;
     align-items: center;
     height: calc(100% - 82px - 70px);
@@ -186,7 +189,7 @@ h1, h2, h3, h4 {
     justify-content: center;
 }
 
-@media screen and (min-width: 375px) {
+@media screen and (min-width: 500px) {
     .container-app {
         border-radius: 10px;
     }

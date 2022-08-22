@@ -1,7 +1,6 @@
 const APPKEY_openweather = 'b3793fa27f3523785e39456380d43fbf'
-const APPKEY_positionstrack = '1ca1073357cef86919c12fba6bb02333'
 const url_openweather = 'https://api.openweathermap.org/data/2.5/'
-const url_positionstack = 'http://api.positionstack.com/v1/'
+const url_positionstack = 'https://apis.datos.gob.ar/georef/api/'
 
 const inputCountries = document.querySelector('#search')
 const units = document.querySelector('#units')
@@ -24,18 +23,17 @@ const getWeather = async (country = 'Buenos Aires', units = 'metric') => {
     localStorage.setItem('country', country)
     localStorage.setItem('units', units)
     try {
-        const responsePosition = await fetch(`${url_positionstack}forward?query=${country}&limit=1&access_key=${APPKEY_positionstrack}`)
+        const responsePosition = await fetch(`${url_positionstack}provincias?nombre=${country}`)
         const ubication = await responsePosition.json()
-        console.log(ubication)
         const response = await fetch(
-            `${url_openweather}onecall?lat=${ubication.data[0].latitude}&lon=${ubication.data[0].longitude}&units=${units}&exclude=minutely&APPID=${APPKEY_openweather}`
+            `${url_openweather}onecall?lat=${ubication.provincias[0].centroide.lat}&lon=${ubication.provincias[0].centroide.lon}&units=${units}&exclude=minutely&APPID=${APPKEY_openweather}`
         )
         const weather = await response.json()
         document.querySelector('#city').innerHTML = country 
         document.querySelector('#temp').innerHTML = `${Math.round(weather.current.temp)}°`
         document.querySelector('#feels-like').innerHTML = `${Math.round(weather.current.feels_like)}°`
         document.querySelector('#humidity').innerHTML = `${weather.current.humidity}%`
-        document.querySelector('#wind-speed').innerHTML = `${weather.current.wind_speed}km/h`
+        document.querySelector('#wind-speed').innerHTML = `${weather.current.wind_speed} ${units === 'metric' ? 'km/h' : 'mi/h'}`
         document.querySelector('#img-weather').src = `https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`
         document.querySelector('#img-weather').alt = `${weather.current.weather[0].description}`
         document.querySelector('#desciption-weather').innerHTML = `${weather.current.weather[0].main}`
@@ -43,19 +41,20 @@ const getWeather = async (country = 'Buenos Aires', units = 'metric') => {
         document.querySelector('#loader').style.display = 'none'
         document.querySelector('#app').style.opacity = 1
 
-        // <label>${new Date(temp.dt*1000)}</label>
         let template = ''
-        weather.hourly.map(temp => {
-            template += 
-            `
-                <div class="card-weather">
-                    <div class="container-img-card">
-                        <img class="img-day-weather" src="https://openweathermap.org/img/wn/${temp.weather[0].icon}@2x.png" alt="${temp.weather[0].description}"/>                    
+        weather.hourly.map((temp, index) => {
+            if(index < 13) {
+                template += 
+                `
+                    <div class="card-weather">
+                        <div class="container-img-card">
+                            <img class="img-day-weather" src="https://openweathermap.org/img/wn/${temp.weather[0].icon}@2x.png" alt="${temp.weather[0].description}"/>                    
+                        </div>
+                        <h3>${Math.round(temp.temp)}°</h3>
+                        <label class="text-datails-temp">${new Date(temp.dt*1000).getHours()}:00</label>
                     </div>
-                    <h3>${Math.round(temp.temp)}°</h3>
-                    <label class="text-datails-temp">${new Date(temp.dt*1000).getHours()}:00</label>
-                </div>
-            `
+                `
+            }
         })
         document.querySelector('#weather-forecast').innerHTML = template
 
@@ -75,5 +74,25 @@ const getWeather = async (country = 'Buenos Aires', units = 'metric') => {
         console.log(error)
     }
 }
+
+const getProvincias = async () => {
+    try {
+        const responseProvincias = await fetch(`${url_positionstack}provincias`)
+        const provincias = await responseProvincias.json()
+        let template = ''
+        provincias.provincias.map(provincia => {
+            console.log(provincia.nombre)
+            template += `
+                <option value="${provincia.nombre}"}>${provincia.nombre}</option>
+            `
+        })
+        document.querySelector('#citys').innerHTML = template
+    } 
+    catch (error) {
+        console.log(error)
+    }
+}
+
+getProvincias()
 
 getWeather()
